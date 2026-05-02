@@ -1,0 +1,10 @@
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+pydantic>=2.4.0
+chromadb>=0.4.0
+sentence-transformers
+google-generativeai>=0.3.0
+python-dotenv>=1.0.0
+requests
+duckduckgo-search>=3.9.0
+python-multipart>=0.0.5

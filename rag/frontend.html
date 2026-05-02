@@ -1,0 +1,929 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O-RAN Threat RAG System</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+          Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      header p {
+        font-size: 1.1em;
+        opacity: 0.9;
+      }
+
+      nav {
+        background: #f5f5f5;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      nav button {
+        flex: 1;
+        padding: 15px 20px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        color: #333;
+        font-weight: 500;
+      }
+
+      nav button:hover {
+        background: #e8e8e8;
+      }
+
+      nav button.active {
+        background: #667eea;
+        color: white;
+      }
+
+      .main-content {
+        padding: 30px;
+      }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h2 {
+        color: #667eea;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1em;
+        font-family: inherit;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      button.btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      button.btn-primary {
+        background: #667eea;
+        color: white;
+      }
+
+      button.btn-primary:hover {
+        background: #5568d3;
+      }
+
+      button.btn-danger {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      button.btn-danger:hover {
+        background: #ff5252;
+      }
+
+      button.btn-secondary {
+        background: #95a5a6;
+        color: white;
+      }
+
+      button.btn-secondary:hover {
+        background: #7f8c8d;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .input-group input {
+        flex: 1;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .stat-card h3 {
+        font-size: 2em;
+        margin-bottom: 5px;
+      }
+
+      .stat-card p {
+        opacity: 0.9;
+      }
+
+      .threat-item {
+        background: #f8f9fa;
+        padding: 15px;
+        border-left: 4px solid #667eea;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      .threat-item h4 {
+        color: #667eea;
+        margin-bottom: 5px;
+      }
+
+      .threat-item .meta {
+        font-size: 0.9em;
+        color: #666;
+        margin-bottom: 5px;
+      }
+
+      .severity {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: 500;
+      }
+
+      .severity.critical {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .severity.high {
+        background: #ffa94d;
+        color: white;
+      }
+
+      .severity.medium {
+        background: #74c0fc;
+        color: white;
+      }
+
+      .severity.low {
+        background: #51cf66;
+        color: white;
+      }
+
+      .search-results {
+        max-height: 500px;
+        overflow-y: auto;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 30px;
+        color: #667eea;
+      }
+
+      .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .alert {
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+
+      .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .alert-error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .alert-info {
+        background: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+
+      .tag {
+        display: inline-block;
+        background: #e7f5ff;
+        color: #667eea;
+        padding: 4px 10px;
+        border-radius: 4px;
+        margin: 2px;
+        font-size: 0.9em;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 10px;
+        border-bottom: 2px solid #e0e0e0;
+        margin-bottom: 20px;
+      }
+
+      .tabs button {
+        padding: 10px 15px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #666;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s ease;
+      }
+
+      .tabs button.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      footer {
+        background: #f5f5f5;
+        padding: 20px;
+        text-align: center;
+        color: #666;
+        border-top: 1px solid #e0e0e0;
+      }
+
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.8em;
+        }
+
+        nav {
+          flex-direction: column;
+        }
+
+        nav button {
+          border-bottom: 1px solid #e0e0e0;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🛡️ O-RAN Threat RAG System</h1>
+        <p>Retrieval-Augmented Generation for Threat Intelligence</p>
+      </header>
+
+      <nav>
+        <button class="nav-btn active" data-section="dashboard">
+          Dashboard
+        </button>
+        <button class="nav-btn" data-section="search">Search Threats</button>
+        <button class="nav-btn" data-section="analyze">Analyze Attack</button>
+        <button class="nav-btn" data-section="threats">Manage Threats</button>
+        <button class="nav-btn" data-section="import-export">
+          Import/Export
+        </button>
+      </nav>
+
+      <div class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+          <h2>📊 Dashboard</h2>
+          <div id="stats-container" class="grid">
+            <div class="loading">
+              <div class="spinner"></div>
+              Loading...
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>ℹ️ System Status</h2>
+            <div id="system-status">Checking...</div>
+          </div>
+        </section>
+
+        <!-- Search Section -->
+        <section id="search" class="section">
+          <div class="card">
+            <h2>🔍 Search Threats</h2>
+            <div class="form-group">
+              <label for="search-query">Search Query</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="search-query"
+                  placeholder="e.g., 'virtualization sandbox evasion'"
+                />
+                <button class="btn btn-primary" onclick="searchThreats()">
+                  Search
+                </button>
+              </div>
+            </div>
+            <div id="search-results" class="search-results"></div>
+          </div>
+        </section>
+
+        <!-- Analyze Attack Section -->
+        <section id="analyze" class="section">
+          <div class="card">
+            <h2>⚠️ Analyze Attack</h2>
+            <form onsubmit="analyzeAttack(event)">
+              <div class="form-group">
+                <label for="attack-description">Attack Description *</label>
+                <textarea
+                  id="attack-description"
+                  placeholder="Describe the attack (e.g., suspicious process on Near-RT RIC with network enumeration)"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="indicators">Detected Indicators *</label>
+                <textarea
+                  id="indicators"
+                  placeholder="Enter indicators separated by commas (e.g., malware.exe, odd_connection, privilege_escalation)"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="target-component">Target O-RAN Component</label>
+                <select id="target-component">
+                  <option value="">-- Select Component --</option>
+                  <option value="O-Cloud">O-Cloud</option>
+                  <option value="SMO">SMO</option>
+                  <option value="Near-RT RIC">Near-RT RIC</option>
+                  <option value="Non-RT RIC">Non-RT RIC</option>
+                  <option value="O-RU">O-RU</option>
+                  <option value="O-DU">O-DU</option>
+                  <option value="O-CU">O-CU</option>
+                  <option value="IAM">IAM</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary">
+                Analyze Threat
+              </button>
+            </form>
+
+            <div id="analysis-result" style="margin-top: 20px"></div>
+          </div>
+        </section>
+
+        <!-- Manage Threats Section -->
+        <section id="threats" class="section">
+          <div class="card">
+            <h2>📝 Manage Threats</h2>
+
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="list-threats">
+                List Threats
+              </button>
+              <button class="tab-btn" data-tab="add-threat">
+                Add New Threat
+              </button>
+            </div>
+
+            <!-- List Threats Tab -->
+            <div id="list-threats" class="tab-content active">
+              <div id="threats-list-container" class="loading">
+                <div class="spinner"></div>
+                Loading threats...
+              </div>
+            </div>
+
+            <!-- Add/Edit Threat Tab -->
+            <div id="add-threat" class="tab-content">
+              <form onsubmit="saveThreat(event)">
+                <div class="form-group">
+                  <label for="threat-id">Threat ID *</label>
+                  <input
+                    type="text"
+                    id="threat-id"
+                    placeholder="e.g., T1497_CUSTOM"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="threat-name">Threat Name *</label>
+                  <input
+                    type="text"
+                    id="threat-name"
+                    placeholder="e.g., Virtualization Evasion"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="threat-description">Description *</label>
+                  <textarea
+                    id="threat-description"
+                    placeholder="Detailed description of the threat"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="threat-severity">Severity</label>
+                  <select id="threat-severity">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                    <option value="critical">Critical</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="threat-buckets"
+                    >O-RAN Buckets (comma-separated)</label
+                  >
+                  <input
+                    type="text"
+                    id="threat-buckets"
+                    placeholder="O-Cloud, SMO, Near-RT RIC"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="threat-mitigations"
+                    >Mitigations (JSON format)</label
+                  >
+                  <textarea
+                    id="threat-mitigations"
+                    placeholder='[{"mitigation_name": "...", "description": "..."}]'
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  Save Threat
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- Import/Export Section -->
+        <section id="import-export" class="section">
+          <div class="card">
+            <h2>📤 Import/Export Knowledge Base</h2>
+
+            <div style="margin-bottom: 20px">
+              <h3>Export as JSON</h3>
+              <p>Download your entire knowledge base</p>
+              <button class="btn btn-secondary" onclick="exportKB()">
+                📥 Export KB
+              </button>
+            </div>
+
+            <div>
+              <h3>Import from JSON</h3>
+              <p>Upload a JSON file to import threats</p>
+              <input type="file" id="import-file" accept=".json" />
+              <button class="btn btn-secondary" onclick="importKB()">
+                📤 Import KB
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <p>O-RAN Threat RAG System v1.0 | Built with ❤️ for cybersecurity</p>
+      </footer>
+    </div>
+
+    <script>
+      const API_BASE = "http://localhost:8000/api";
+
+      // Navigation
+      document.querySelectorAll(".nav-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".nav-btn")
+            .forEach((b) => b.classList.remove("active"));
+          document
+            .querySelectorAll(".section")
+            .forEach((s) => s.classList.remove("active"));
+
+          btn.classList.add("active");
+          const section = document.getElementById(btn.dataset.section);
+          if (section) section.classList.add("active");
+
+          if (btn.dataset.section === "dashboard") loadDashboard();
+          if (btn.dataset.section === "threats") loadThreats();
+        });
+      });
+
+      // Tab switching
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tab-btn")
+            .forEach((b) => b.classList.remove("active"));
+          document
+            .querySelectorAll(".tab-content")
+            .forEach((t) => t.classList.remove("active"));
+
+          btn.classList.add("active");
+          const tab = document.getElementById(btn.dataset.tab);
+          if (tab) tab.classList.add("active");
+        });
+      });
+
+      // Load Dashboard
+      async function loadDashboard() {
+        try {
+          const response = await fetch(`${API_BASE}/info`);
+          const data = await response.json();
+
+          const grid = document.querySelector("#stats-container");
+          grid.innerHTML = `
+                    <div class="stat-card">
+                        <h3>${data.knowledge_base.total_threats}</h3>
+                        <p>Total Threats</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>${data.knowledge_base.total_components}</h3>
+                        <p>Components Affected</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>${data.knowledge_base.total_mitigations}</h3>
+                        <p>Mitigations</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>${data.knowledge_base.indexed_documents}</h3>
+                        <p>Indexed Documents</p>
+                    </div>
+                `;
+
+          document.getElementById("system-status").innerHTML = `
+                    <p>✓ System is running</p>
+                    <p>✓ Knowledge Base: Active (${data.knowledge_base.total_threats} threats)</p>
+                    <p>✓ RAG Agent: Ready</p>
+                `;
+        } catch (e) {
+          document.querySelector("#stats-container").innerHTML =
+            `<div class="alert alert-error">Error loading stats: ${e.message}</div>`;
+        }
+      }
+
+      // Search Threats
+      async function searchThreats() {
+        const query = document.getElementById("search-query").value;
+        if (!query) return;
+
+        const resultsDiv = document.getElementById("search-results");
+        resultsDiv.innerHTML =
+          '<div class="loading"><div class="spinner"></div>Searching...</div>';
+
+        try {
+          const response = await fetch(`${API_BASE}/threats/search`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query, top_k: 10 }),
+          });
+          const data = await response.json();
+
+          let html = "";
+          for (const result of data.results) {
+            const threat = result.threat;
+            const score = (result.relevance_score * 100).toFixed(0);
+            html += `
+                        <div class="threat-item">
+                            <h4>${threat.threat_name}</h4>
+                            <div class="meta">
+                                ID: ${threat.threat_id} | MITRE: ${threat.mitre_id || "N/A"} | Match: <strong>${score}%</strong>
+                            </div>
+                            <div><span class="severity ${threat.severity}">${threat.severity.toUpperCase()}</span></div>
+                            <p>${threat.threat_description.substring(0, 200)}...</p>
+                            <div>
+                                ${threat.oran_buckets.map((b) => `<span class="tag">${b}</span>`).join("")}
+                            </div>
+                        </div>
+                    `;
+          }
+          resultsDiv.innerHTML = html || "<p>No results found</p>";
+        } catch (e) {
+          resultsDiv.innerHTML = `<div class="alert alert-error">Search error: ${e.message}</div>`;
+        }
+      }
+
+      // Analyze Attack
+      async function analyzeAttack(e) {
+        e.preventDefault();
+
+        const description = document.getElementById("attack-description").value;
+        const indicators = document
+          .getElementById("indicators")
+          .value.split(",")
+          .map((i) => i.trim());
+        const component = document.getElementById("target-component").value;
+
+        const resultDiv = document.getElementById("analysis-result");
+        resultDiv.innerHTML =
+          '<div class="loading"><div class="spinner"></div>Analyzing threat... This may take 30-60 seconds...</div>';
+
+        try {
+          // Wait for analysis to complete (no polling needed)
+          const response = await fetch(`${API_BASE}/analyze`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              attack_description: description,
+              detected_indicators: indicators,
+              target_component: component || null,
+            }),
+          });
+
+          if (!response.ok) {
+            const error = await response.json();
+            resultDiv.innerHTML = `<div class="alert alert-error">Error: ${error.detail || response.statusText}</div>`;
+            return;
+          }
+
+          const data = await response.json();
+
+          if (data.status === "completed" && data.result) {
+            displayAnalysisResult(data.result);
+          } else {
+            resultDiv.innerHTML = `<div class="alert alert-error">Unexpected response format</div>`;
+          }
+        } catch (e) {
+          console.error("Error:", e);
+          resultDiv.innerHTML = `<div class="alert alert-error">Error: ${e.message}</div>`;
+        }
+      }
+
+      function displayAnalysisResult(result) {
+        try {
+          if (!result) {
+            document.getElementById("analysis-result").innerHTML =
+              '<div class="alert alert-error">Invalid analysis result</div>';
+            return;
+          }
+
+          let html = `<div class="card"><h2>Analysis Results</h2>`;
+
+          // Severity
+          const severity = result.severity_assessment || "medium";
+          html += `<p><strong>Severity:</strong> <span class="severity ${severity.toLowerCase()}">${severity}</span></p>`;
+
+          // Matched Threats
+          const matches = result.knowledge_base_matches || [];
+          if (matches.length > 0) {
+            html += "<h3>Matched Threats</h3>";
+            for (const threat of matches) {
+              const score = (threat.relevance_score || 0) * 100;
+              html += `
+                        <div class="threat-item">
+                            <h4>${threat.threat_name || "Unknown Threat"}</h4>
+                            <p>Match Score: ${score.toFixed(0)}%</p>
+                            <p>${threat.description || "No description"}</p>
+                        </div>
+                    `;
+            }
+          }
+
+          // AI Analysis
+          const analysis = result.ai_analysis || "No analysis available";
+          html += `<h3>AI Analysis</h3><div style="white-space: pre-wrap; background: #f5f5f5; padding: 15px; border-radius: 4px;">${analysis}</div>`;
+
+          html += "</div>";
+          document.getElementById("analysis-result").innerHTML = html;
+        } catch (e) {
+          console.error("Display error:", e, result);
+          document.getElementById("analysis-result").innerHTML =
+            `<div class="alert alert-error">Error displaying results: ${e.message}</div>`;
+        }
+      }
+
+      // Load Threats
+      async function loadThreats() {
+        try {
+          const response = await fetch(`${API_BASE}/threats?limit=20`);
+          const data = await response.json();
+
+          let html = `<p>Showing ${data.threats.length} of ${data.total} threats</p>`;
+          for (const threat of data.threats) {
+            html += `
+                        <div class="threat-item">
+                            <h4>${threat.threat_name}</h4>
+                            <div class="meta">ID: ${threat.threat_id} | ${threat.custom ? "(Custom)" : "(MITRE)"}| Severity: <span class="severity ${threat.severity}">${threat.severity}</span></div>
+                            <button class="btn btn-danger" onclick="deleteThreat('${threat.threat_id}')" style="margin-top: 10px;">Delete</button>
+                        </div>
+                    `;
+          }
+          document.getElementById("threats-list-container").innerHTML = html;
+        } catch (e) {
+          document.getElementById("threats-list-container").innerHTML =
+            `<div class="alert alert-error">Error: ${e.message}</div>`;
+        }
+      }
+
+      // Save Threat
+      async function saveThreat(e) {
+        e.preventDefault();
+
+        const threatData = {
+          threat_id: document.getElementById("threat-id").value,
+          threat_name: document.getElementById("threat-name").value,
+          threat_description:
+            document.getElementById("threat-description").value,
+          severity: document.getElementById("threat-severity").value,
+          oran_buckets: document
+            .getElementById("threat-buckets")
+            .value.split(",")
+            .map((b) => b.trim()),
+          mitigations: JSON.parse(
+            document.getElementById("threat-mitigations").value || "[]",
+          ),
+        };
+
+        try {
+          const response = await fetch(`${API_BASE}/threats`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(threatData),
+          });
+          const result = await response.json();
+
+          alert(`✓ ${result.message}`);
+          loadThreats();
+          document.querySelector("form").reset();
+        } catch (e) {
+          alert(`❌ Error: ${e.message}`);
+        }
+      }
+
+      // Delete Threat
+      async function deleteThreat(threatId) {
+        if (confirm(`Delete threat "${threatId}"?`)) {
+          try {
+            await fetch(`${API_BASE}/threats/${threatId}`, {
+              method: "DELETE",
+            });
+            alert("✓ Threat deleted");
+            loadThreats();
+          } catch (e) {
+            alert(`❌ Error: ${e.message}`);
+          }
+        }
+      }
+
+      // Export KB
+      function exportKB() {
+        window.location.href = `${API_BASE}/export/json`;
+      }
+
+      // Import KB
+      async function importKB() {
+        const file = document.getElementById("import-file").files[0];
+        if (!file) {
+          alert("Please select a file");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+          const response = await fetch(`${API_BASE}/import/json`, {
+            method: "POST",
+            body: formData,
+          });
+          const result = await response.json();
+          alert(`✓ ${result.message}`);
+          loadThreats();
+        } catch (e) {
+          alert(`❌ Error: ${e.message}`);
+        }
+      }
+
+      // Initial load
+      loadDashboard();
+    </script>
+  </body>
+</html>

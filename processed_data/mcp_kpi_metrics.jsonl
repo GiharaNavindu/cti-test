@@ -1,0 +1,49 @@
+{"stage": "prune.model_load", "duration_seconds": 6.121488, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-04T05:15:59+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.000743, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-04T05:15:59+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.16302, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-04T05:15:59+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.040635, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-04T05:15:59+00:00"}
+{"stage": "prune.model_load", "duration_seconds": 5.845797, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-04T05:17:27+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.000212, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-04T05:17:27+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.204282, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-04T05:17:27+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.03642, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-04T05:17:27+00:00"}
+{"stage": "prune.semantic_filter", "duration_seconds": 47.926594, "metadata": {"min_threshold": 25, "object_count": 1918}, "timestamp": "2026-04-04T05:18:15+00:00"}
+{"stage": "prune.total", "duration_seconds": 62.261882, "metadata": {"original_objects": 1918, "pruned_objects": 1764, "retained_objects": 154, "retention_rate": 8.03, "output_file": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\processed_data\\lite_bundle.json.gz"}, "timestamp": "2026-04-04T05:18:23+00:00"}
+{"stage": "prune.model_load", "duration_seconds": 6.162711, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-04T05:18:31+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.000256, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-04T05:18:31+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.058116, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-04T05:18:31+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.036404, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-04T05:18:31+00:00"}
+{"stage": "prune.semantic_filter", "duration_seconds": 42.251442, "metadata": {"min_threshold": 25, "object_count": 1918}, "timestamp": "2026-04-04T05:19:13+00:00"}
+{"stage": "prune.total", "duration_seconds": 53.8947, "metadata": {"original_objects": 1918, "pruned_objects": 1764, "retained_objects": 154, "retention_rate": 8.03, "output_file": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\processed_data\\lite_bundle.json.gz"}, "timestamp": "2026-04-04T05:19:19+00:00"}
+{"stage": "prune.model_load", "duration_seconds": 6.86329, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-04T05:20:35+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.0004, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-04T05:20:35+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.263124, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-04T05:20:35+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.048277, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-04T05:20:35+00:00"}
+{"stage": "prune.semantic_filter", "duration_seconds": 2.223192, "metadata": {"min_threshold": 25, "object_count": 1918}, "timestamp": "2026-04-04T05:20:37+00:00"}
+{"stage": "prune.model_load", "duration_seconds": 6.338305, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-04T05:21:59+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.000412, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-04T05:21:59+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.201362, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-04T05:21:59+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.030755, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-04T05:21:59+00:00"}
+{"stage": "prune.semantic_filter", "duration_seconds": 49.63219, "metadata": {"min_threshold": 25, "object_count": 1918}, "timestamp": "2026-04-04T05:22:49+00:00"}
+{"stage": "prune.total", "duration_seconds": 62.126618, "metadata": {"original_objects": 1918, "pruned_objects": 1764, "retained_objects": 154, "retention_rate": 8.03, "output_file": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\processed_data\\lite_bundle.json.gz"}, "timestamp": "2026-04-04T05:22:55+00:00"}
+{"stage": "intel_gathering.attack_fetch", "duration_seconds": 6.270009, "metadata": {}, "timestamp": "2026-04-04T05:23:42+00:00"}
+{"stage": "intel_gathering.fight_fetch", "duration_seconds": 3.736164, "metadata": {}, "timestamp": "2026-04-04T05:23:46+00:00"}
+{"stage": "intel_gathering.fight_convert", "duration_seconds": 8.271581, "metadata": {}, "timestamp": "2026-04-04T05:23:54+00:00"}
+{"stage": "prune.model_load", "duration_seconds": 6.548879, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-04T05:24:01+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.000509, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-04T05:24:01+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.211392, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-04T05:24:01+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.036492, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-04T05:24:01+00:00"}
+{"stage": "prune.semantic_filter", "duration_seconds": 50.148158, "metadata": {"min_threshold": 25, "object_count": 1918}, "timestamp": "2026-04-04T05:24:51+00:00"}
+{"stage": "prune.total", "duration_seconds": 63.823261, "metadata": {"original_objects": 1918, "pruned_objects": 1764, "retained_objects": 154, "retention_rate": 8.03, "output_file": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\processed_data\\lite_bundle.json.gz"}, "timestamp": "2026-04-04T05:24:58+00:00"}
+{"stage": "intel_gathering.prune", "duration_seconds": 63.829494, "metadata": {}, "timestamp": "2026-04-04T05:24:58+00:00"}
+{"stage": "intel_utilization.db_load", "duration_seconds": 0.173818, "metadata": {}, "timestamp": "2026-04-04T05:24:58+00:00"}
+{"stage": "intel_utilization.edge_dispatch", "duration_seconds": 0.000225, "metadata": {"component": "RIC"}, "timestamp": "2026-04-04T05:24:58+00:00"}
+{"stage": "mcp.get_oran_threat_context", "duration_seconds": 0.000629, "metadata": {"component": "RIC", "threat_indicators": ["sms", "signaling", "ran"]}, "timestamp": "2026-04-04T05:25:18+00:00"}
+{"stage": "mcp.deploy_odu_mitigation", "duration_seconds": 4e-06, "metadata": {"rule_id": "odu-priority", "target_ip": "10.0.0.55"}, "timestamp": "2026-04-04T05:25:18+00:00"}
+{"stage": "intel_sharing.sanitize_report", "duration_seconds": 3.1e-05, "metadata": {"original_length": 61, "sanitized_length": 89}, "timestamp": "2026-04-04T05:25:24+00:00"}
+{"stage": "intel_utilization.health_check", "duration_seconds": 2.047182, "metadata": {"endpoint": "http://127.0.0.1:8080/health", "healthy": false, "error": "HTTPConnectionPool(host='127.0.0.1', port=8080): Max retries exceeded with url: /health (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001E2A115F8C0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))"}, "timestamp": "2026-04-04T05:25:26+00:00"}
+{"stage": "prune.model_load", "duration_seconds": 8.032475, "metadata": {"model": "all-MiniLM-L6-v2"}, "timestamp": "2026-04-07T09:49:25+00:00"}
+{"stage": "prune.ontology_load", "duration_seconds": 0.001979, "metadata": {"ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"}, "timestamp": "2026-04-07T09:49:25+00:00"}
+{"stage": "prune.ontology_encode", "duration_seconds": 0.541588, "metadata": {"keyword_count": 15}, "timestamp": "2026-04-07T09:49:26+00:00"}
+{"stage": "prune.bundle_load", "duration_seconds": 0.069128, "metadata": {"bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"}, "timestamp": "2026-04-07T09:49:26+00:00"}
+{"stage": "prune.semantic_filter", "duration_seconds": 94.217383, "metadata": {"min_threshold": 25, "object_count": 1918}, "timestamp": "2026-04-07T09:51:00+00:00"}
+{"stage": "prune.total", "duration_seconds": 112.071579, "metadata": {"original_objects": 1918, "pruned_objects": 1764, "retained_objects": 154, "retention_rate": 8.03, "output_file": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\processed_data\\lite_bundle.json.gz"}, "timestamp": "2026-04-07T09:51:09+00:00"}

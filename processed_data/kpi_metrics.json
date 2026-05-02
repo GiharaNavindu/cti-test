@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-04-07T09:51:09+00:00",
+  "event_count": 6,
+  "totals": {
+    "prune.model_load": 8.032475,
+    "prune.ontology_load": 0.001979,
+    "prune.ontology_encode": 0.541588,
+    "prune.bundle_load": 0.069128,
+    "prune.semantic_filter": 94.217383,
+    "prune.total": 112.071579
+  },
+  "events": [
+    {
+      "stage": "prune.model_load",
+      "duration_seconds": 8.032475,
+      "metadata": {
+        "model": "all-MiniLM-L6-v2"
+      },
+      "timestamp": "2026-04-07T09:49:25+00:00"
+    },
+    {
+      "stage": "prune.ontology_load",
+      "duration_seconds": 0.001979,
+      "metadata": {
+        "ontology_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\oran_ontology.json"
+      },
+      "timestamp": "2026-04-07T09:49:25+00:00"
+    },
+    {
+      "stage": "prune.ontology_encode",
+      "duration_seconds": 0.541588,
+      "metadata": {
+        "keyword_count": 15
+      },
+      "timestamp": "2026-04-07T09:49:26+00:00"
+    },
+    {
+      "stage": "prune.bundle_load",
+      "duration_seconds": 0.069128,
+      "metadata": {
+        "bundle_path": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\raw_data\\attck_bundle.json"
+      },
+      "timestamp": "2026-04-07T09:49:26+00:00"
+    },
+    {
+      "stage": "prune.semantic_filter",
+      "duration_seconds": 94.217383,
+      "metadata": {
+        "min_threshold": 25,
+        "object_count": 1918
+      },
+      "timestamp": "2026-04-07T09:51:00+00:00"
+    },
+    {
+      "stage": "prune.total",
+      "duration_seconds": 112.071579,
+      "metadata": {
+        "original_objects": 1918,
+        "pruned_objects": 1764,
+        "retained_objects": 154,
+        "retention_rate": 8.03,
+        "output_file": "D:\\7th\\FYP\\github\\stixx-cti\\pipeline\\processed_data\\lite_bundle.json.gz"
+      },
+      "timestamp": "2026-04-07T09:51:09+00:00"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+[2026-04-25 06:46:40] [INFO] 
+
+[2026-04-25 06:46:40] [INFO] ██████████████████████████████████████████████████████████████████████
+[2026-04-25 06:46:40] [INFO] █                                                                    █
+[2026-04-25 06:46:40] [INFO] █      STIXX-CTI PIPELINE - COMPLETE THREAT INTELLIGENCE WORKFLOW    █
+[2026-04-25 06:46:40] [INFO] █                                                                    █
+[2026-04-25 06:46:40] [INFO] ██████████████████████████████████████████████████████████████████████
+[2026-04-25 06:46:40] [INFO] Started: 2026-04-25 06:46:40
+[2026-04-25 06:46:40] [INFO] ======================================================================
+[2026-04-25 06:46:40] [INFO] STEP 1: Fetching ATT&CK Data from MITRE TAXII Server
+[2026-04-25 06:46:40] [INFO] ======================================================================
+[2026-04-25 06:46:40] [INFO] ✓ ATT&CK bundle already exists at raw_data\attck_bundle.json
+[2026-04-25 06:46:40] [INFO] 
+======================================================================
+[2026-04-25 06:46:40] [INFO] STEP 2: Fetching FiGHT Data
+[2026-04-25 06:46:40] [INFO] ======================================================================
+[2026-04-25 06:46:40] [INFO] ✓ FiGHT data already exists at raw_data\fight_data.yaml
+[2026-04-25 06:46:40] [INFO] 
+======================================================================
+[2026-04-25 06:46:40] [INFO] STEP 3: Converting FiGHT YAML to STIX Format
+[2026-04-25 06:46:40] [INFO] ======================================================================
+[2026-04-25 06:46:40] [INFO] Converting FiGHT YAML to STIX objects...
+[2026-04-25 06:46:42] [INFO] ✓ Successfully converted FiGHT to STIX
+[2026-04-25 06:46:42] [INFO] ✓ Saved to: raw_data\fight_stix_bundle.json
+[2026-04-25 06:46:42] [INFO] 
+======================================================================
+[2026-04-25 06:46:42] [INFO] STEP 4: Visualizing Threat Data
+[2026-04-25 06:46:42] [INFO] ======================================================================
+[2026-04-25 06:46:42] [INFO] Generating threat data visualizations...
+[2026-04-25 06:46:42] [INFO]   - Creating interactive network graphs
+[2026-04-25 06:46:42] [INFO]   - Generating statistics dashboards
+[2026-04-25 06:46:42] [INFO]   - Building relationship heatmaps
+[2026-04-25 06:46:57] [INFO] 
+✓ Visualization Summary:
+[2026-04-25 06:46:57] [INFO]   - ATT&CK Objects: 1918
+[2026-04-25 06:46:57] [INFO]   - FiGHT Objects: 185
+[2026-04-25 06:46:57] [INFO]   - ATT&CK Relationships: 1335
+[2026-04-25 06:46:57] [INFO]   - FiGHT Relationships: 0
+[2026-04-25 06:46:57] [INFO] ✓ Visualizations saved to: processed_data\visualizations
+[2026-04-25 06:46:57] [INFO] 
+======================================================================
+[2026-04-25 06:46:57] [INFO] STEP 5: Pruning STIX Data Using Semantic Similarity
+[2026-04-25 06:46:57] [INFO] ======================================================================
+[2026-04-25 06:46:57] [INFO] Pruning using ORAN ontology semantic similarity...
+[2026-04-25 06:46:57] [INFO]   - Max-Sim strategy for ontology matching
+[2026-04-25 06:46:57] [INFO]   - 25% minimum relevance threshold
+[2026-04-25 06:54:09] [INFO] ✓ Successfully pruned STIX data
+[2026-04-25 06:54:09] [INFO] ✓ Pruned bundle saved to: processed_data/lite_bundle.json.gz
+[2026-04-25 06:54:09] [INFO] 
+======================================================================
+[2026-04-25 06:54:09] [INFO] PIPELINE EXECUTION SUMMARY
+[2026-04-25 06:54:09] [INFO] ======================================================================
+[2026-04-25 06:54:09] [INFO] ✓ PASSED: ATT&CK Data Fetch
+[2026-04-25 06:54:09] [INFO] ✓ PASSED: FiGHT Data Fetch
+[2026-04-25 06:54:09] [INFO] ✓ PASSED: FiGHT to STIX Conversion
+[2026-04-25 06:54:09] [INFO] ✓ PASSED: Threat Data Visualization
+[2026-04-25 06:54:09] [INFO] ✓ PASSED: STIX Data Pruning
+[2026-04-25 06:54:09] [INFO] 
+Completed: 2026-04-25 06:54:09
+[2026-04-25 06:54:09] [INFO] Total Time: 448.82 seconds (7.48 minutes)
+[2026-04-25 06:54:09] [INFO] 
+✓ Pipeline completed successfully!
+[2026-04-25 06:54:09] [INFO] ======================================================================
